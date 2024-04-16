@@ -1,5 +1,5 @@
 class CuentaBancaria:
-    def __init__(self, id, persona_id, banco_id, saldo):
+    def __init__(self, id=None, persona_id=None, banco_id=None, saldo=None):
         self.id = id
         self.persona_id = persona_id
         self.banco_id = banco_id
@@ -22,4 +22,7 @@ class CuentaBancaria:
     
     def set_saldo(self, saldo):
         self.saldo = saldo
+        
+    def to_string(self):
+        return f"{self.id}, {self.persona_id}, {self.banco_id}, {self.saldo}"
         

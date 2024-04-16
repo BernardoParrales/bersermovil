@@ -49,6 +49,40 @@ def prueba_banco():
     banco_service = BancoService()
     test(5, banco_service, banco)
     
-prueba_banco()
+#prueba_banco()
+from bersermovil.servicios.personaservice import PersonaService
+from bersermovil.modelos.persona import Persona
+
+def prueba_persona():
+    persona = Persona(None, "Juan", "Garcia", "0999999998")
+    print(persona.to_string())
+    
+    persona_servicio = PersonaService()
+    test(5, persona_servicio, persona)
+    
+#prueba_persona()
+
+from bersermovil.servicios.paqueteservice import PaqueteService
+from bersermovil.modelos.paquete import Paquete
+
+def prueba_paquete():
+    paquete = Paquete(4, 4, "Paquete de 4$ con 4096 MB", 4096, 5)
+    print(paquete.to_string())
+    
+    paquete_service = PaqueteService()
+    test(5, paquete_service, paquete)
+    
+#prueba_paquete()
+from bersermovil.servicios.cuentabancariaservice import CuentaBancariaService
+from bersermovil.modelos.cuentabancaria import CuentaBancaria
+
+def prueba_cuentabancaria():
+    cuentabancaria = CuentaBancaria(3, 1, 2, 5)
+    print(cuentabancaria.to_string())
+    
+    cuentabancaria_service = CuentaBancariaService()
+    test(5, cuentabancaria_service, cuentabancaria)
+    
+prueba_cuentabancaria()
 
 

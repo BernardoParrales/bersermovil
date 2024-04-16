@@ -1,5 +1,5 @@
 class Paquete:
-    def __init__(self, id, costo, descripcion, saldo_megas, dias):
+    def __init__(self, id=None, costo=None, descripcion=None, saldo_megas=None, dias=None):
         self.id = id
         self.costo = costo
         self.descripcion = descripcion
@@ -21,5 +21,7 @@ class Paquete:
     def get_dias(self):
         return self.dias
     
+    def to_string(self):
+        return f"{self.id}, {self.costo}, {self.descripcion}, {self.saldo_megas}, {self.dias}"
     
         
