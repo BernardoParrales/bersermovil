@@ -188,7 +188,7 @@ class Menu:
         tr()
         
     def infomacion_arcotel(self):
-        print("Información Arcotel\nARCOTEL informaque tienes derecho a la entrega de tu factura fisica o electronica...")
+        print("Información Arcotel\nARCOTEL informa que tienes derecho a la entrega de tu factura física o electrónica...")
         
         
 
