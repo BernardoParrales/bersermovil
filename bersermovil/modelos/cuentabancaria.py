@@ -5,21 +5,21 @@ class CuentaBancaria:
         self.banco_id = banco_id
         self.saldo = saldo
         
-    def getId(self):
+    def get_id(self):
         return self.id
     
-    def getPersona_id(self):
+    def get_persona_id(self):
         return self.persona_id
     
-    def getBanco_id(self):
+    def get_banco_id(self):
         return self.banco_id
     
-    def getSaldo(self):
+    def get_saldo(self):
         return self.saldo
     
-    def toString(self):
+    def to_string(self):
         return f"{self.id}, {self.persona_id}, {self.banco_id}, {self.saldo}"
     
-    def setSaldo(self, saldo):
+    def set_saldo(self, saldo):
         self.saldo = saldo
         

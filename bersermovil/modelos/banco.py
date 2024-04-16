@@ -3,9 +3,9 @@ class Banco:
         self.id = id
         self.nombre = nombre
         
-    def getId(self):
+    def get_id(self):
         return self.id
     
-    def getNombre(self):
+    def get_nombre(self):
         return self.nombre
     

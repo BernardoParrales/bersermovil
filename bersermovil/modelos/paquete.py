@@ -6,19 +6,19 @@ class Paquete:
         self.saldo_megas = saldo_megas
         self.dias = dias
         
-    def getId(self):
+    def get_id(self):
         return self.id
     
-    def getCosto(self):
+    def get_costo(self):
         return self.costo
     
-    def getDescripcion(self):
+    def get_descripcion(self):
         return self.descripcion
     
-    def getSaldoMegas(self):
+    def get_saldo_megas(self):
         return self.saldo_megas
     
-    def getDias(self):
+    def get_dias(self):
         return self.dias
     
     
