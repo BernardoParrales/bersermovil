@@ -1,0 +1,4 @@
+1 hora: estrutura del proyecto y requerimientos
+5 hora: Terminar el menu.py
+
+Nota: Ya estan los metodos definidos para el controlador, faltarian crear los modelos.
