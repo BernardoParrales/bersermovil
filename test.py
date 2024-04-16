@@ -43,11 +43,11 @@ from bersermovil.servicios.bancoservices import BancoService
 from bersermovil.modelos.banco import Banco
 
 def prueba_banco():
-    banco = Banco(None, "Banco Pichincha")
+    banco = Banco(3, "Banco del Austro")
     print(banco.to_string())
     
     banco_service = BancoService()
-    test(1, banco_service, banco)
+    test(5, banco_service, banco)
     
 prueba_banco()
 

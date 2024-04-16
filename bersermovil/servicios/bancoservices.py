@@ -20,16 +20,16 @@ class BancoService(IService):
             cursor.execute(sql, registro)
             database.commit()
         except Exception as e:
-            return [cursor.rowcount, type(e).__name__, e,self]    
+            return [cursor.rowcount, type(e).__name__, e, self]    
         return [cursor.rowcount, self]
     
     def read(self, obj=Banco()):
         try:
-            sql = f"SELECT * FROM bancos WHERE nombre = {obj.nombre}"
+            sql = f"SELECT * FROM bancos WHERE nombre = {obj.id}"
             cursor.execute(sql)
             result = cursor.fetchone()
         except Exception as e:
-            return [cursor.rowcount, type(e).__name__, self] 
+            return [cursor.rowcount, type(e).__name__, e, self] 
         return result
     
     def read_all(self):
@@ -41,21 +41,23 @@ class BancoService(IService):
             return [cursor.rowcount, type(e).__name__, self]
         return result
     
+    # Este metodo requiere el ID
     def update(self, obj=Banco()):
         try:
             sql = f"UPDATE bancos SET nombre = %s WHERE id_banco = {obj.id}"
-            registro = (obj.nombre)
+            registro = [obj.nombre]
             cursor.execute(sql, registro)
             database.commit()
         except Exception as e:
-            return [cursor.rowcount, type(e).__name__, self]
+            return [cursor.rowcount, type(e).__name__, e, self]
         return [cursor.rowcount, self]
     
+    # Este metodo requiere el ID
     def delete(self, obj=Banco()):
         try:
             sql = f"DELETE FROM bancos WHERE id_banco = {obj.id}"
             cursor.execute(sql)
             database.commit()
         except Exception as e:
-            return [cursor.rowcount, type(e).__name__, self]
+            return [cursor.rowcount, type(e).__name__, e, self]
         return [cursor.rowcount, self] 
