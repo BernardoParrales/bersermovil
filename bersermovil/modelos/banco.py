@@ -1,5 +1,5 @@
 class Banco:
-    def __init__(self, id, nombre):
+    def __init__(self, id=None, nombre=None):
         self.id = id
         self.nombre = nombre
         
@@ -8,4 +8,7 @@ class Banco:
     
     def get_nombre(self):
         return self.nombre
+    
+    def to_string(self):
+        return f"{self.id}, {self.nombre}"
     

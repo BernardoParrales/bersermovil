@@ -1,9 +1,4 @@
 # Pruebas de los modelos y servicios
-
-# NUMERO_TELENOFO
-# Import
-from bersermovil.servicios.numeroservice import NumeroService
-from bersermovil.modelos.numero import NumeroTelofono
 from bersermovil.servicios.iservice import IService
 
 # Funcion para testear los metodos de los servicios
@@ -27,13 +22,33 @@ def test(op=None, servicio=None, obj=None):
     
     print(valor)
     return valor
+
+# NUMERO_TELENOFO
+# Import
+from bersermovil.servicios.numeroservice import NumeroService
+from bersermovil.modelos.numero import NumeroTelofono
     
-# Prueba del objeto
-estados = ["activo", "inactivo"]
-numero = NumeroTelofono(None, None, 0, "0999999995", estados[1])
-print(numero.to_string())
+def prueba_numero():
+    # Prueba del objeto
+    estados = ["activo", "inactivo"]
+    numero = NumeroTelofono(None, None, 0, "0999999995", estados[1])
+    print(numero.to_string())
+    # Prueba del servicio
+    numero_service = NumeroService()
+    test(5, numero_service, numero)
+#prueba_numero()
 
-# Prueba del servicio
-numero_service = NumeroService()
+# BANCOS
+from bersermovil.servicios.bancoservices import BancoService
+from bersermovil.modelos.banco import Banco
 
-test(5, numero_service, numero)
+def prueba_banco():
+    banco = Banco(None, "Banco Pichincha")
+    print(banco.to_string())
+    
+    banco_service = BancoService()
+    test(1, banco_service, banco)
+    
+prueba_banco()
+
+
