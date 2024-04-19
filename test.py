@@ -83,6 +83,19 @@ def prueba_cuentabancaria():
     cuentabancaria_service = CuentaBancariaService()
     test(5, cuentabancaria_service, cuentabancaria)
     
-prueba_cuentabancaria()
+#prueba_cuentabancaria()
+
+from bersermovil.servicios.saldoservice import SaldoService
+from bersermovil.modelos.saldo import Saldo
+
+def prueba_saldo():
+    saldo = Saldo(4, 9, 0)
+    print(saldo.to_string())
+    
+    saldo_servicio = SaldoService()
+    test(5, saldo_servicio, saldo)
+    
+#prueba_saldo()
+
 
 
