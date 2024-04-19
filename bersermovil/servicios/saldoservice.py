@@ -19,6 +19,7 @@ class SaldoService(IService):
             return [cursor.rowcount, type(e).__name__, self]    
         return [cursor.rowcount, self]
     
+    # Requiere el ID
     def read(self, obj=Saldo()):
         try:
             sql = f"SELECT * FROM saldos WHERE id_saldo = {obj.id}"

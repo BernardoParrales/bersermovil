@@ -1,16 +1,18 @@
 # Menu 
 
 from bersermovil.vista.componentes import indice, tr
-import bersermovil.controlador.controlador as control
+
 from bersermovil.controlador.controlador import Controlador
+
+OPINVALID = "Opción invalida"
 
 class Menu:
        
     def __init__(self, numero_telefono):
         self.numero_telefono = numero_telefono
-        self.menu_principal()
-        self.control = control.Controlador(numero_telefono)
         self.__controlador = Controlador(numero_telefono)
+        self.menu_principal()
+        
         
     def menu_principal(self):
         tr()
@@ -32,70 +34,47 @@ class Menu:
             self.menu_otros_servicios()
 
         elif opcion == "5":
-            self.infomacion_arcotel()
-            
-        #else:
-            
-    def menu_paquetes_desactualizado(self):
-        print("Paquetes")
-        paquetes = ["Paquete $1.00", "Paquete $2.00", "Paquete $3.00", "Paquete $4.00", "Paquete $5.00", "Atras", "Salir"]
-        controla = control.Controlador(self.numero_telefono)
-        paquetes = controla.consultar_paquetes_disponible()
-        print(paquetes)
-        indice(paquetes)
-        opcion = input()
-        tr()
-        
-        if opcion == "1": self.paquete(paquetes[0], 512, 1, 1.00)
-        elif opcion == "2": self.paquete(paquetes[1], 1024, 2, 2.00)
-        elif opcion == "3": self.paquete(paquetes[3], 2048, 3, 3.00)
-        elif opcion == "4": self.paquete(paquetes[4], 4096, 7, 4.00)
-        elif opcion == "5": self.paquete(paquetes[5], 5120, 15, 5.00)
-        elif opcion == "6": self.menu_principal()
-        else: exit()
+            self.infomacion_arcotel()         
         
     def menu_paquetes(self):
-        controla = control.Controlador(self.numero_telefono)
-        paquetes = controla.consultar_paquetes_disponible()
-        
-        for paquete in paquetes: print(f"{paquete[0]}. {paquete[2]}.")
-        opcion = input()
+        # Atributos de un paquete: 0:id_paquete, 1:costo, 2:descripcion, 3:saldo_megas, 4:dias
+        paquetes = self.__controlador.consultar_paquetes_disponible()
+        contador = 0
+        for paquete in paquetes: 
+            print(f"{paquete[0]}. {paquete[2]}.") 
+            contador += 1
+        id_paquete = int(input())
         tr()
-        #self.paquete()
-
-    def paquete(self, tituto, datos, tiempo, valor):
-        print(f"{tituto}\n"+
-              f"Este paquete incluye {datos} MB para navegar, Whatsapp y Facebook gratis,"+
-              f" llamadas y SMS ilimitados por {str(tiempo)} día(s).\n")
-        indice(["Activar paquete", "Atras", "Salir"])
-        opcion = input()
-        tr()
-        
-        if opcion == "1": self.menu_compra(valor)
-        elif opcion == "2": self.menu_paquetes()
-        else: exit()
-        
-    
-    def menu_compra(self, valor):
+        print(id_paquete)
+        if id_paquete > 0 and id_paquete <= contador:
+            self.menu_compra_paquete(paquetes[(id_paquete-1)])
+        else:
+            print("Fuera del rango")
+               
+    # Recibe una tupla del paquete seleccionado
+    def menu_compra_paquete(self, paquete):
         print("Metodo de Compra para Activar el Paquete")
         indice(["Con Saldo en Dolares", "Cargo a Cuenta Bancaria", "Atras"])
         opcion = input()
         tr()
         
-        if opcion == "1": self.menu_compra_paquete_con_saldo_en_dolares(valor)
-        if opcion == "2": self.menu_compra_con_cargo_cuenta_bancaria(valor)
+        if opcion == "1": self.menu_compra_paquete_con_saldo_en_dolares(paquete)
+        if opcion == "2": self.menu_compra_con_cargo_cuenta_bancaria(paquete)
         
-        
-    def menu_compra_paquete_con_saldo_en_dolares(self, valor):
+    # COMPRAR EL PAQUETE CON SALDO EN DOLARES   
+    def menu_compra_paquete_con_saldo_en_dolares(self, paquete):
         print("Compra con Saldo en Dolares")
-        controla = control.Controlador(self.numero_telefono)
-        saldo_en_dolares = controla.consultar_saldo_en_dolares() # Realizar compra de saldo en dolares
-        if saldo_en_dolares >= valor: 
-            controla.realizar_compra_con_saldo_en_dolares(valor)
-            print(f"Se a realizado la compra del paque de {valor}$")
-        else: 
-            self.menu_saldo_insuficiente(valor, ["paquete", valor])
-            
+        saldo_en_dolares = self.__controlador.consultar_saldo_en_dolares() # Realizar compra de saldo en dolares
+        
+        if saldo_en_dolares >= paquete[1]: 
+            self.__controlador.realizar_compra_de_paquete_con_saldo_en_dolares(paquete)
+            print(f"Se a realizado la compra del {paquete[2]}")
+        else:
+            print(f"Saldo insuficiente. Tu saldo actual es de {saldo_en_dolares}$\n") 
+            exit()
+            #self.menu_saldo_insuficiente(valor, ["paquete", valor])
+        
+    # Atributos: id, saldo en dolares, saldo en megas        
     def menu_saldo_insuficiente(self, valor, tipo_de_saldo=[]):
         print(f"Saldo insuficiente.\n¿Desea comprar {tipo_de_saldo[0]} con cuenta bancaria?")
         indice(["Si.", "Volver al menu principal.", "Salir."])
@@ -171,9 +150,8 @@ class Menu:
         
     def menu_consulta_saldos(self):
         print("Consulta de Saldos")
-        controla = control.Controlador(self.numero_telefono)
-        saldos = controla.consultar_saldos()
-        print(f"Tu saldo actual es:\nSaldo total en dolares: {saldos[0]}$\nSaldo de megas de paquetes: {saldos[1]} MB")
+        saldos = self.__controlador.consultar_saldos()
+        print(f"Tu saldo actual es:\nSaldo total en dolares: {saldos[1]}$\nSaldo de megas de paquetes: {saldos[2]} MB")
         indice(["Atras", "Salir"])
         opciones = input()
         if opciones == "1": self.menu_principal()

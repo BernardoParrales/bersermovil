@@ -18,6 +18,9 @@ class Persona:
     def get_cedula(self):
         return self.cedula
     
+    def set_id(self, id):
+        self.id = id
+    
     def set_nombre(self, nombre):
         self.nombre = nombre
         

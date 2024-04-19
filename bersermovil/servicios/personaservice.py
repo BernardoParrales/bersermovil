@@ -26,7 +26,7 @@ class PersonaService(IService):
     
     def read(self, obj=Persona()):
         try:
-            sql = f"SELECT * FROM personas WHERE cedula = {obj.cedula}"
+            sql = f"SELECT * FROM personas WHERE id_persona = {obj.id}"
             cursor.execute(sql)
             result = cursor.fetchone()
         except Exception as e:

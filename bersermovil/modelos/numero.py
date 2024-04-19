@@ -24,6 +24,9 @@ class NumeroTelofono:
     def to_string(self):
         return f"{self.id}, {self.persona_id}, {self.saldo_id}, {self.numero_telefono}, {self.estado}"
     
+    def set_id(self, id):
+        self.id = id
+    
     def set_persona_id(self, persona_id):
         self.persona_id = persona_id
         

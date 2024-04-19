@@ -2,11 +2,10 @@ from bersermovil.servicios.controlador_services import ControladorService
 
 class Controlador:
     
-    __controlador_service = ControladorService()
-    
     # Constructor
     def __init__(self, numero_telefono):
         self.numero_telefono = numero_telefono
+        self.__controlador_service = ControladorService(numero_telefono)
     
     def consultar_paquetes_disponible(self):
         paquetes = self.__controlador_service.mostrar_paquetes_disponibles()
@@ -14,9 +13,16 @@ class Controlador:
     
     # Consulta el saldo actual en dolares para validar...
     def consultar_saldo_en_dolares(self):
-        return 1
+        saldo_actual = self.__controlador_service.consultar_saldo_en_dolares_disponible()
+        return saldo_actual
     
-    def realizar_compra_con_saldo_en_dolares(self, valor):
+    # El paquete es de tipo Tupla (id_paquete, costo, descripcion, saldo_megas, dias)
+    def realizar_compra_de_paquete_con_saldo_en_dolares(self, paquete):
+        result = self.__controlador_service.comprar_paquete(paquete)
+        return result
+    
+    def realizar_compra_con_saldo_en_dolares(self):
+        
         return 1
         
     def consultar_bancos_disponibles(self):
@@ -51,7 +57,8 @@ class Controlador:
     # Consultar Saldo es un metodo que retorna un array con el saldo actual de un numero
     def consultar_saldos(self):
         # Consulta los saldos actuales del numero
-        return [5, 250]
+        result = self.__controlador_service.consultar_saldos()
+        return result
     
     def consultar_mi_numero(self):
         # Consultar mi numero
