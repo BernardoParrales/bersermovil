@@ -1,8 +1,16 @@
+from bersermovil.servicios.controlador_services import ControladorService
+
 class Controlador:
+    
+    __controlador_service = ControladorService()
     
     # Constructor
     def __init__(self, numero_telefono):
         self.numero_telefono = numero_telefono
+    
+    def consultar_paquetes_disponible(self):
+        paquetes = self.__controlador_service.mostrar_paquetes_disponibles()
+        return paquetes
     
     # Consulta el saldo actual en dolares para validar...
     def consultar_saldo_en_dolares(self):

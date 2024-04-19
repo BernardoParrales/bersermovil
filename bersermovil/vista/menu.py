@@ -2,6 +2,7 @@
 
 from bersermovil.vista.componentes import indice, tr
 import bersermovil.controlador.controlador as control
+from bersermovil.controlador.controlador import Controlador
 
 class Menu:
        
@@ -9,6 +10,7 @@ class Menu:
         self.numero_telefono = numero_telefono
         self.menu_principal()
         self.control = control.Controlador(numero_telefono)
+        self.__controlador = Controlador(numero_telefono)
         
     def menu_principal(self):
         tr()
@@ -34,10 +36,12 @@ class Menu:
             
         #else:
             
-    def menu_paquetes(self):
+    def menu_paquetes_desactualizado(self):
         print("Paquetes")
         paquetes = ["Paquete $1.00", "Paquete $2.00", "Paquete $3.00", "Paquete $4.00", "Paquete $5.00", "Atras", "Salir"]
-        
+        controla = control.Controlador(self.numero_telefono)
+        paquetes = controla.consultar_paquetes_disponible()
+        print(paquetes)
         indice(paquetes)
         opcion = input()
         tr()
@@ -49,6 +53,15 @@ class Menu:
         elif opcion == "5": self.paquete(paquetes[5], 5120, 15, 5.00)
         elif opcion == "6": self.menu_principal()
         else: exit()
+        
+    def menu_paquetes(self):
+        controla = control.Controlador(self.numero_telefono)
+        paquetes = controla.consultar_paquetes_disponible()
+        
+        for paquete in paquetes: print(f"{paquete[0]}. {paquete[2]}.")
+        opcion = input()
+        tr()
+        #self.paquete()
 
     def paquete(self, tituto, datos, tiempo, valor):
         print(f"{tituto}\n"+
