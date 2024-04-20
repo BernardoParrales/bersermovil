@@ -31,7 +31,7 @@ from bersermovil.modelos.numero import NumeroTelofono
 def prueba_numero():
     # Prueba del objeto
     estados = ["activo", "inactivo"]
-    numero = NumeroTelofono(None, None, 0, "0999585829", estados[1])
+    numero = NumeroTelofono(None, None, 0, "0999999999", estados[1])
     print(numero.to_string())
     # Prueba del servicio
     numero_service = NumeroService()

@@ -1,7 +1,7 @@
 # ¡IMPORTANTE! Los servicios piden un Objeto de su tipo, NO datos como str o int
 from bersermovil.servicios.controlador_services import ControladorService
 
-control_service = ControladorService("0999585829")
+control_service = ControladorService("0999999999")
 
 def prueba_mpd():
     paquetes = control_service.mostrar_paquetes_disponibles()
@@ -16,7 +16,7 @@ def prueba_csedd():
 #prueba_csedd()
 
 def prueba_ec():
-    cedula = control_service.consultar_cedula("094417028")
+    cedula = control_service.consultar_cedula("0999999999")
     print(cedula)
     
 prueba_ec()

@@ -34,29 +34,6 @@ class Controlador:
         result = self.__controlador_service.consultar_cedula(cedula)
         return result
     
-    def validar_cuenta_bancaria(self, numero_cuenta): # Hace una consulta a la db para saber si existe dicho numero
-        return True
-    
-    # paquete, saldo en dolares
-    def realizar_compra_cuenta_bancaria(self, valor, tipo_de_saldo=[]):
-        valor_cuenta_actual = 20
-        
-        if valor <= valor_cuenta_actual:
-            valor_Actual = valor_cuenta_actual - valor
-            
-            # Restar el valor a la cuenta bancaria
-            # Sumar el saldo comprado
-            
-            return True
-        else:
-            return False
-            
-    def activar_tarjeta_prepago(self, numero_tarjeta):
-        # Realizar una consulta para ver si existe el numero
-        # Si existe se extrae el valor del saldo y se lo agrega al NUMERO de la cuenta asociada, return True
-        # Caso contrario retorna False
-        return True
-    
     # Consultar Saldo es un metodo que retorna un array con el saldo actual de un numero
     def consultar_saldos(self):
         # Consulta los saldos actuales del numero

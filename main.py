@@ -1,2 +1,2 @@
 from bersermovil.vista.menu import Menu
-llamada = Menu("0999585829")
+llamada = Menu("0999999999")
