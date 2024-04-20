@@ -33,6 +33,15 @@ class PersonaService(IService):
             return [cursor.rowcount, type(e).__name__, self] 
         return result
     
+    def buscar_por_cedula(self, obj=Persona()):
+        try:
+            sql = f"SELECT * FROM personas WHERE cedula = {obj.cedula}"
+            cursor.execute(sql)
+            result = cursor.fetchone()
+        except Exception as e:
+            return [cursor.rowcount, type(e).__name__, self] 
+        return result
+    
     def read_all(self):
         try:
             sql = "SELECT * FROM personas"

@@ -17,8 +17,8 @@ class Controlador:
         return saldo_actual
     
     # El paquete es de tipo Tupla (id_paquete, costo, descripcion, saldo_megas, dias)
-    def realizar_compra_de_paquete_con_saldo_en_dolares(self, paquete):
-        result = self.__controlador_service.comprar_paquete(paquete)
+    def realizar_compra_de_paquete_con_saldo_en_dolares(self,numero_cuenta, paquete):
+        result = self.__controlador_service.comprar_paquete_con_cuenta_bancaria(numero_cuenta, paquete)
         return result
     
     def realizar_compra_con_saldo_en_dolares(self):
@@ -26,10 +26,13 @@ class Controlador:
         return 1
         
     def consultar_bancos_disponibles(self):
-        return ["Banco Pinchincha", "Banco de Guayaquil", "Banco Bolivariano", "Banco del Pacifico"]  
+        bancos = self.__controlador_service.consultar_bancos()
+        return bancos
     
-    def validar_cedula(self, cedula): # Hace una consulta a la db para saber si existe dicha cedula
-        return True
+    # Hace una consulta a la db para saber si existe dicha cedula
+    def validar_cedula(self, cedula):
+        result = self.__controlador_service.consultar_cedula(cedula)
+        return result
     
     def validar_cuenta_bancaria(self, numero_cuenta): # Hace una consulta a la db para saber si existe dicho numero
         return True
@@ -64,9 +67,10 @@ class Controlador:
         mi_numero = self.__controlador_service.consultar_mi_numero()
         return mi_numero
     
+    # Consultar informacion persona del nuemro asociado
     def consultar_mi_informacion(self):
-        # Consultar informacion persona del nuemro asociado
-        return [1, "Victor", "Parrales", "0944170288"]
+        info = self.__controlador_service.consultar_mi_informacion()
+        return info
         
         
         

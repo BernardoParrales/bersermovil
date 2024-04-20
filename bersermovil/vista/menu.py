@@ -1,7 +1,5 @@
 # Menu 
-
 from bersermovil.vista.componentes import indice, tr
-
 from bersermovil.controlador.controlador import Controlador
 
 OPINVALID = "Opción invalida"
@@ -59,7 +57,7 @@ class Menu:
         tr()
         
         if opcion == "1": self.menu_compra_paquete_con_saldo_en_dolares(paquete)
-        if opcion == "2": self.menu_compra_con_cargo_cuenta_bancaria(paquete)
+        if opcion == "2": self.menu_compra_paquete_con_cargo_cuenta_bancaria(paquete)
         
     # COMPRAR EL PAQUETE CON SALDO EN DOLARES   
     def menu_compra_paquete_con_saldo_en_dolares(self, paquete):
@@ -71,50 +69,25 @@ class Menu:
             print(f"Se a realizado la compra del {paquete[2]}")
         else:
             print(f"Saldo insuficiente. Tu saldo actual es de {saldo_en_dolares}$\n") 
-            exit()
-            #self.menu_saldo_insuficiente(valor, ["paquete", valor])
+            #exit()
+            self.menu_saldo_insuficiente(paquete)
         
     # Atributos: id, saldo en dolares, saldo en megas        
-    def menu_saldo_insuficiente(self, valor, tipo_de_saldo=[]):
-        print(f"Saldo insuficiente.\n¿Desea comprar {tipo_de_saldo[0]} con cuenta bancaria?")
+    def menu_saldo_insuficiente(self, paquete):
+        print(f"¿Desea comprar {paquete} con cuenta bancaria?")
         indice(["Si.", "Volver al menu principal.", "Salir."])
         opcion = input()
         tr()
-        if opcion == "1": self.menu_compra_con_cargo_cuenta_bancaria(valor, tipo_de_saldo)
+        if opcion == "1": self.menu_compra_paquete_con_cargo_cuenta_bancaria(paquete)
         elif opcion == "2": self.menu_principal()
         else: exit()
             
     # paquete, saldo en dolares
-    def menu_compra_con_cargo_cuenta_bancaria(self, valor, tipo_de_saldo=[]): # El tipo de saldo identifica el tipo de salgo (dolares o megas)
-        print("Elija el banco:")
-        controla = control.Controlador(self.numero_telefono)
-        bancos = controla.consultar_bancos_disponibles() # Consulta todos los bancos disponibles
-        indice(bancos) # Selecciona el banco
-        try:
-            opcion = int(input()) # Comprueba que el valor ingresado sea el correcto
-            if opcion >= 0: # Valida el rango de las opciones
-                banco_seleccionado = bancos[opcion-1] # Guarda el banco seleccionado
-                cedula = input("Ingrese el número de cédula: ") 
-                validar_cedula = controla.validar_cedula(cedula) # Valida que la cedula sea real
-                if validar_cedula: 
-                    id_cuenta_bancaria = input("Ingrese número de cuenta: ")
-                    valida_cuenta_bancaria = controla.validar_cuenta_bancaria(banco_seleccionado, id_cuenta_bancaria) # Valida la existencia de la cuenta del usuario
-                    if valida_cuenta_bancaria:
-                        comprobar_compra = controla.realizar_compra_cuenta_bancaria(valor, tipo_de_saldo) # Return True si se realizo la compra
-                        if comprobar_compra:
-                            print("Se realizo la compra con exito.")
-                            self.menu_principal()
-                        else:
-                            print("Saldo insuficiente para realizar la compra.")
-                    else:
-                        print("Cuenta bancaria no existe.")
-                else:
-                    print("Cédula no existe.")
-            else:
-                print("Opción invalida.")                            
-        except Exception:
-            print("Opción invalida.")
-            exit()
+    def menu_compra_paquete_con_cargo_cuenta_bancaria(self, paquete): # El tipo de saldo identifica el tipo de salgo (dolares o megas)
+        print("Ingrese el número de cuenta")
+        numero_cuenta = input()
+        result = self.__controlador.realizar_compra_de_paquete_con_saldo_en_dolares(numero_cuenta, paquete)
+        print(result)
         
     def menu_recargas(self):
         print("Recargas")
@@ -160,10 +133,10 @@ class Menu:
         print(f"Mi número es: {mi_numero}")
         tr()
         
+    # Persona: id, nombre, apellido, cedula
     def mostrar_mi_informacion(self):
-        controla = control.Controlador(self.numero_telefono)
-        mi_informacion = controla.consultar_mi_informacion()
-        print(f"Información del propietario del número teléfonico:\nNombre: {mi_informacion[1]}\nApellido: {mi_informacion[2]}\nNúmero de Cédula: {mi_informacion[3]}")
+        mi_informacion = self.__controlador.consultar_mi_informacion()
+        print(f"Información del propietario del número teléfonico:\nNombre: {mi_informacion.get_nombre()}\nApellido: {mi_informacion.get_apellido()}\nNúmero de Cédula: {mi_informacion.get_cedula()}")
         tr()
         
     def infomacion_arcotel(self):

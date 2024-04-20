@@ -13,4 +13,10 @@ from bersermovil.modelos.numero import NumeroTelofono
 def prueba_csedd():
     saldo = control_service.consultar_saldo_en_dolares_disponible()
     print(saldo)
-prueba_csedd()
+#prueba_csedd()
+
+def prueba_ec():
+    cedula = control_service.consultar_cedula("094417028")
+    print(cedula)
+    
+prueba_ec()
