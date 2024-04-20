@@ -132,6 +132,32 @@ class ControladorService:
         else: result = "No se pudo realizar la compra."
         return result
     
+    def compra_de_saldo_con_cuenta_bancaria(self, numero_cuenta, costo):
+        # Datos Fondo Actual Cuenta Bancaria
+        obj_cuenta = CuentaBancaria(numero_cuenta)
+        obj_fondo_actual = self.__cuenta_bancaria_service.read(obj_cuenta)
+        fondo_actual = obj_fondo_actual[3]
+        
+        # Validar fondos para la compra
+        if fondo_actual >= costo:    
+            # Datos Saldo Actual Megas
+            obj_saldo_actual = self.__saldo_service.read(self.__obj_saldo)
+            saldo_actual_dolares = obj_saldo_actual[1]
+            saldo_actual_megas = obj_saldo_actual[2]
+            # Operaciones
+            nuevo_fondo_actual = fondo_actual - costo
+            nuevo_saldo_dolares = saldo_actual_dolares + costo
+            
+            # Actualizar registros
+            obj_saldo = Saldo(obj_saldo_actual[0], nuevo_saldo_dolares, saldo_actual_megas)
+            self.__saldo_service.update(obj_saldo)
+            
+            obj_cuenta = CuentaBancaria(numero_cuenta, obj_fondo_actual[1], obj_fondo_actual[2], nuevo_fondo_actual)
+            self.__cuenta_bancaria_service.update(obj_cuenta)
+            result = "Compra realiza con exito."
+        else: result = "No se pudo realizar la compra."
+        return result
+    
     def consultar_saldos(self):
         saldos = self.__saldo_service.read(self.__obj_saldo)
         return saldos

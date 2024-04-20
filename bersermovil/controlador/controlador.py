@@ -21,9 +21,9 @@ class Controlador:
         result = self.__controlador_service.comprar_paquete_con_cuenta_bancaria(numero_cuenta, paquete)
         return result
     
-    def realizar_compra_con_saldo_en_dolares(self):
-        
-        return 1
+    def realizar_compra_de_saldo_con_cargo_cuenta_bancaria(self, numero_cuenta, paquete):
+        result = self.__controlador_service.compra_de_saldo_con_cuenta_bancaria(numero_cuenta, paquete)
+        return result
         
     def consultar_bancos_disponibles(self):
         bancos = self.__controlador_service.consultar_bancos()

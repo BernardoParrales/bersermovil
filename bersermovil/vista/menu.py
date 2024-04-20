@@ -103,12 +103,17 @@ class Menu:
         print("Ingrese la cantidad de saldo en dolares a recargar en multiplos de 1.\nPor ejemplo: 1, 2, 3, 10...")
         try:
             cantidad_saldo_dolares = int(input())
-            self.menu_compra_con_cargo_cuenta_bancaria(cantidad_saldo_dolares, ["saldo en dolares", cantidad_saldo_dolares])
+            self.menu_compra_saldo_con_cargo_cuenta_bancaria(cantidad_saldo_dolares)
             tr()
         except Exception:
             print("Valor invalido.")
             exit()
-        
+    
+    def menu_compra_saldo_con_cargo_cuenta_bancaria(self, valor): # El tipo de saldo identifica el tipo de salgo (dolares o megas)
+        print("Ingrese el número de cuenta")
+        numero_cuenta = input()
+        result = self.__controlador.realizar_compra_de_saldo_con_cargo_cuenta_bancaria(numero_cuenta, valor)
+        print(result)
         
     def menu_consulta_saldos(self):
         print("Consulta de Saldos")
