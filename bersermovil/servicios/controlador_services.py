@@ -98,3 +98,7 @@ class ControladorService:
     def consultar_saldos(self):
         saldos = self.__saldo_service.read(self.__obj_saldo)
         return saldos
+    
+    def consultar_mi_numero(self):
+        mi_numero = self.__obj_numero_telefono.get_numero_telefono()
+        return mi_numero

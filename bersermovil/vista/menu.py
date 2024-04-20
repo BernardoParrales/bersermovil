@@ -118,23 +118,12 @@ class Menu:
         
     def menu_recargas(self):
         print("Recargas")
-        indice(["Activación de Tarjeta Prepago", "Recargar saldo en dolares", "Atras", "Salir"])
+        indice(["Recargar saldo en dolares", "Atras", "Salir"])
         opcion = input()
         tr()
-        if opcion == "1": self.menu_activar_tarjeta_prepago()
-        if opcion == "2": self.menu_recargar_saldo_en_dolares()
-        if opcion == "3": self.menu_principal()
+        if opcion == "1": self.menu_recargar_saldo_en_dolares()
+        if opcion == "2": self.menu_principal()
         else: exit()
-        
-    # Validar que la tarjeta exista en la BD
-    def menu_activar_tarjeta_prepago(self):
-        print("Ingrese el número de la tarjeta:")
-        numero_tarjeta = input()
-        controla = control.Controlador()
-        activo_tarjeta = controla.activar_tarjeta_prepago(numero_tarjeta)
-        
-        if activo_tarjeta: print("Se activo la tarjeta con exito.")
-        else: print("Número de la tarjeta invalido.")
 
           
     def menu_recargar_saldo_en_dolares(self):
@@ -167,8 +156,7 @@ class Menu:
         elif opciones == "3": self.menu_principal()
             
     def mostrar_mi_numero(self):
-        controla = control.Controlador(self.numero_telefono)
-        mi_numero = controla.consultar_mi_numero()
+        mi_numero = self.__controlador.consultar_mi_numero()
         print(f"Mi número es: {mi_numero}")
         tr()
         

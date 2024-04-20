@@ -61,8 +61,8 @@ class Controlador:
         return result
     
     def consultar_mi_numero(self):
-        # Consultar mi numero
-        return "0999585829"
+        mi_numero = self.__controlador_service.consultar_mi_numero()
+        return mi_numero
     
     def consultar_mi_informacion(self):
         # Consultar informacion persona del nuemro asociado
